@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="viacep.css">
+</head>
+<body>
+    
+    <div class="titulo">
+    <p>ViaCEP</p> <br>
+    </div>
+    
+    <form>
+    <input type="text" max="8" placeholder="CEP (EX: 01001000)" maxlength="8" id="pesquisaCEP"/>
+    <button type="button" id="btnCep" onclick="buscarCep()">Pesquisar</button>
+    <button type="button" id="limparCEP" onclick="limparCep()">Limpar campos</button>
+    </form> 
+
+    <br>
+    
+    <form>
+    <input type="text" placeholder="UF (EX: SP)" id="pesquisaUF"/>
+    <input type="text" placeholder="Localidade (EX: São Paulo)" id="pesquisaLocalidade"/>
+    <input type="text" placeholder="Logradouro (EX: Praça da Sé)" id="pesquisaLogradouro"/>
+    <button type="button" id="btnEndereço" onclick="buscarEndereço()">Pesquisar</button>
+    <button type="button" id="btnLimparEndereço" onclick="limparEndereço()">Limpar campos</button>
+    </form>
+    
+    <p>Resultados</p>
+    <div class="resultsDiv" id="resultadoDiv"></div>
+    
+    <br>
+
+    <button id="btnHistPesquisa">Histórico de pesquisa</button>
+    <button id="btnLimparPesquisa">Limpar Histórico</button>
+    <div id=""></div>
+    
+    <script src="viacep.js"></script>
+    
+</body>
+</html>

@@ -7,36 +7,49 @@
     <link rel="stylesheet" type="text/css" href="viacep.css">
 </head>
 <body>
+    
+   <div class="titulo">ViaCEP</div>
+
+   <div class="formCompleto">
+    
+     <div class="titulo2">Faça a sua pesquisa</div>
+     
+     <div class="modosPesquisa">
+      <button type="button" class="modoCep" onclick="pesquisarPorCep()">Pesquisar por CEP</button>
+      <button type="button" class="modoEndereço" onclick="pesquisarPorEndereco()">Pesquisar por Endereço</button>
+     </div>
+
+     <br>
+
+     <div id="formCep" style="display:block;">
+      <input type="text" min="8" max="8" placeholder="CEP (EX: 01001000)" maxlength="8" id="pesquisaCEP"/><br>
+      <p><button type="button" id="btnCep" onclick="buscarCep()">Pesquisar</button>
+      <button type="button" id="limparCEP" onclick="limparCep()">Limpar campos</button></p>
+     </div>
+ 
+     <br>
    
-    <div class="titulo">
-    <p>ViaCEP</p> <br>
+     <div id="formEndereco" style="display:none;">
+      <input type="text" placeholder="UF (EX: SP)" id="pesquisaUF"/><br>
+      <input type="text" placeholder="Localidade (EX: São Paulo)" id="pesquisaLocalidade"/><br>
+      <input type="text" placeholder="Logradouro (EX: Praça da Sé)" id="pesquisaLogradouro"/>
+      <p><button type="button" id="btnEndereço" onclick="buscarEndereço()">Pesquisar</button>
+      <button type="button" id="btnLimparEndereço" onclick="limparEndereço()">Limpar campos</button></p>
+     </div>
+   
+     <p class="tituloresult">RESULTADOS</p>
+    
+     <div class="resultsDiv" id="resultadoDiv"></div>
+   
+     <br>
+ 
+      <button id="btnHistPesquisa">Histórico de pesquisa</button>
+      <button id="btnLimparPesquisa">Limpar Histórico</button>
+      <div id=""></div>
+
     </div>
-   
-    <form>
-    <input type="text" max="8" placeholder="CEP (EX: 01001000)" maxlength="8" id="pesquisaCEP"/><br>
-    <p><button type="button" id="btnCep" onclick="buscarCep()">Pesquisar</button>
-    <button type="button" id="limparCEP" onclick="limparCep()">Limpar campos</button></p>
-    </form>
- 
-    <br>
-   
-    <form>
-    <input type="text" placeholder="UF (EX: SP)" id="pesquisaUF"/><br>
-    <input type="text" placeholder="Localidade (EX: São Paulo)" id="pesquisaLocalidade"/><br>
-    <input type="text" placeholder="Logradouro (EX: Praça da Sé)" id="pesquisaLogradouro"/>
-    <p><button type="button" id="btnEndereço" onclick="buscarEndereço()">Pesquisar</button>
-    <button type="button" id="btnLimparEndereço" onclick="limparEndereço()">Limpar campos</button></p>
-    </form>
-   
-    <p>Resultados</p>
-    <div class="resultsDiv" id="resultadoDiv"></div>
-   
-    <br>
- 
-    <button id="btnHistPesquisa">Histórico de pesquisa</button>
-    <button id="btnLimparPesquisa">Limpar Histórico</button>
-    <div id=""></div>
-   
+
+
     <script src="viacep.js"></script>
    
 </body>

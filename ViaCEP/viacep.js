@@ -12,7 +12,7 @@ async function fetchCepData (cep, uf, localidade, logradouro) {
     setData (null); 
     
     const resultDivCep = document.getElementById ("resultadoDiv");
-    resultDivCep.innerHTML = "Carregando...";
+    resultDivCep.innerHTML = "<div class='carregando'>Carregando...</div>";
 
     try {
         let url = "";
@@ -26,7 +26,7 @@ async function fetchCepData (cep, uf, localidade, logradouro) {
         }
 
         else {
-            resultDivCep.innerHTML = "Preencha um dos campos";
+            resultDivCep.innerHTML = "<div class='carregando'>Preencha um dos campos</div>";
             return;
         }
 
@@ -34,18 +34,18 @@ async function fetchCepData (cep, uf, localidade, logradouro) {
         const json = await response.json();
 
         if (json.erro || (Array.isArray(json) && json.length === 0)) {
-            resultDivCep.innerHTML = "Endereço não encontrado";
+            resultDivCep.innerHTML = "<div class='carregando'>Endereço não encontrado</div>";
         }
     
         else {
             if (Array.isArray(json)) {
                 resultDivCep.innerHTML = json.map (item => 
                     `
-                    <p>CEP: ${item.cep}</p>
-                    <p>UF: ${item.uf}</p>
-                    <p>Localidade: ${item.localidade}</p>
-                    <p>Logradouro: ${item.logradouro}</p>
-                    <hr>
+                    <p><strong>CEP:</strong> ${item.cep}</p>
+                    <p><strong>UF:</strong> ${item.uf}</p>
+                    <p><strong>Localidade:</strong> ${item.localidade}</p>
+                    <p><strong>Logradouro:</strong> ${item.logradouro}</p>
+                    <hr style="border-top: 1px solid #d8b7dd;">
                     `
                 ).join ("");
             }
@@ -53,10 +53,10 @@ async function fetchCepData (cep, uf, localidade, logradouro) {
             else {
                 resultDivCep.innerHTML = 
                 `
-                <p>CEP: ${json.cep}</p>
-                <p>UF: ${json.uf}</p>
-                <p>Localidade: ${json.localidade}</p>
-                <p>Logradouro: ${json.logradouro}</p>
+                <p><strong>CEP:</strong> ${json.cep}</p>
+                <p><strong>UF:</strong> ${json.uf}</p>
+                <p><strong>Localidade:</strong> ${json.localidade}</p>
+                <p><strong>Logradouro:</strong> ${json.logradouro}</p>
                 <hr>
                 `;
             }
@@ -65,7 +65,7 @@ async function fetchCepData (cep, uf, localidade, logradouro) {
     }
 
     catch (err) {
-    resultDivCep.innerHTML = "Erro ao pesquisar";
+    resultDivCep.innerHTML = "<div class='carregando'>Erro ao pesquisar</div>";
     console.error(err);
     }
 
@@ -108,5 +108,16 @@ function limparEndereço () {
     resultDivCep.innerHTML = '';
 }
 
+function pesquisarPorCep() {
+    document.getElementById("formCep").style.display = "block";
+    document.getElementById("formEndereco").style.display = "none";
+    document.getElementById("resultadoDiv").innerHTML = "";
+}
+
+function pesquisarPorEndereco() {
+    document.getElementById("formCep").style.display = "none";
+    document.getElementById("formEndereco").style.display = "block";
+    document.getElementById("resultadoDiv").innerHTML = "";
+}
 
 

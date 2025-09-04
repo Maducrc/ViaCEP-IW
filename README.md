@@ -5,7 +5,7 @@
   <li>Pesquisa por CEP</li>
   <li>Pesquisa por Endereço</li>
   <li>Histórico de Pesquisas</li>
-  <li>FUnções adicionais<br>
+  <li>Funções adicionais<br>
       - Botão limpar campos <br>
       - Botão limpar hisórico <br>
   </li>

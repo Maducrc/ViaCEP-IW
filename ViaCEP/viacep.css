@@ -38,6 +38,7 @@ html, body {
 background-color: #f9f7fa;
 color: #690b98;
 border: 1px solid #f9f7fa;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .modosPesquisa button:hover {
@@ -57,6 +58,7 @@ border: 1px solid #f9f7fa;
     padding: 10px;
     min-height: 50px;
     width: 450px;
+    height: auto;
 }
 
 .tituloresult {
@@ -110,6 +112,19 @@ button:hover {
 }
 
 .carregando {
+    color: #690b98;
+}
+
+.historico {
+    border: 1px, solid, #f9f7fa;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 50px;
+    width: 450px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.titleHist {
     color: #690b98;
 }
 

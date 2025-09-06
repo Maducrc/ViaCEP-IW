@@ -33,8 +33,8 @@
       <input type="text" placeholder="UF (EX: SP)" id="pesquisaUF"/><br>
       <input type="text" placeholder="Localidade (EX: São Paulo)" id="pesquisaLocalidade"/><br>
       <input type="text" placeholder="Logradouro (EX: Praça da Sé)" id="pesquisaLogradouro"/>
-      <p><button type="button" id="btnEndereço" onclick="buscarEndereço()">Pesquisar</button>
-      <button type="button" id="btnLimparEndereço" onclick="limparEndereço()">Limpar campos</button></p>
+      <p><button type="button" id="btnEndereco" onclick="buscarEndereco()">Pesquisar</button>
+      <button type="button" id="btnLimparEndereco" onclick="limparEndereco()">Limpar campos</button></p>
      </div>
    
      <p class="tituloresult">RESULTADOS</p>
@@ -42,15 +42,15 @@
      <div class="resultsDiv" id="resultadoDiv"></div>
    
      <br>
- 
-      <button id="btnHistPesquisa">Histórico de pesquisa</button>
-      <button id="btnLimparPesquisa">Limpar Histórico</button>
-      <div id=""></div>
+
+     
+     <div class="btnHistP"><button id="btnHistPesquisa" onclick="carregarHistorico()">Histórico de pesquisa</button></div>
+     <div class="historico" id="historico"></div>
+     <div class="btnLimpP"></div><button id="btnLimparPesquisa" style="display:none">Limpar Histórico</button></div>
+     </div>
 
     </div>
 
-
     <script src="viacep.js"></script>
-   
 </body>
 </html>

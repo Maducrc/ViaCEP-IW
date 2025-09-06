@@ -6,6 +6,7 @@ function setLoading(v) { loading = v; }
 function setError(v) { error = v; }
 function setData(v) { data = v; }
 
+//Requisição API
 async function fetchCepData (cep, uf, localidade, logradouro) {
     setLoading (true);
     setError (null);
@@ -74,12 +75,20 @@ async function fetchCepData (cep, uf, localidade, logradouro) {
     }
 }
 
+//Pesquisa
 function buscarCep () {
-    
     const cep = document.getElementById ("pesquisaCEP").value;
     fetchCepData(cep);
 }
 
+function buscarEndereco () {
+    const uf = document.getElementById ("pesquisaUF").value;
+    const localidade = document.getElementById ("pesquisaLocalidade").value;
+    const logradouro = document.getElementById ("pesquisaLogradouro").value;
+    fetchCepData(null, uf, localidade, logradouro);
+}
+
+//Limpar campos
 function limparCep () {
     const cepInput = document.getElementById ("pesquisaCEP");
     cepInput.value = '';
@@ -88,14 +97,7 @@ function limparCep () {
     resultDivCep.innerHTML = '';
 }
 
-function buscarEndereço () {
-    const uf = document.getElementById ("pesquisaUF").value;
-    const localidade = document.getElementById ("pesquisaLocalidade").value;
-    const logradouro = document.getElementById ("pesquisaLogradouro").value;
-    fetchCepData(null, uf, localidade, logradouro);
-}
-
-function limparEndereço () {
+function limparEndereco () {
     const ufInput = document.getElementById ("pesquisaUF");
     const localidadeInput = document.getElementById ("pesquisaLocalidade");
     const logradouroInput = document.getElementById ("pesquisaLogradouro");
@@ -108,6 +110,7 @@ function limparEndereço () {
     resultDivCep.innerHTML = '';
 }
 
+//Páginas de Pesquisa
 function pesquisarPorCep() {
     document.getElementById("formCep").style.display = "block";
     document.getElementById("formEndereco").style.display = "none";
@@ -120,4 +123,69 @@ function pesquisarPorEndereco() {
     document.getElementById("resultadoDiv").innerHTML = "";
 }
 
+//Histórico de Pesquisa
+function salvarHistorico (entrada) {
+    historico.push(entrada);
+    localStorafe.setItem("historico", JSON.stringfy (historico)); //Salva o histórico 
+}
+
+let historico = JSON.parse (localStorage.getItem("historico")) || []; //Está procurando um histórico de pesquisa 
+let historicoVisivel = false;
+
+function carregarHistorico() {
+    const resultDiv = document.getElementById("historico");
+    const btnLimpar = document.getElementById("btnLimparPesquisa");
+    if (historico.length === 0) {
+    resultDiv.innerHTML = "<div class='carregando'><p>Nenhum histórico foi encontrado</p></div>"
+    btnLimpar.style.display = "none";
+    return;
+    }
+
+    else {
+        resultDiv.innerHTML = "<p>Histórico de Pesquisas:</p>" +
+        historico.map(item => `<div>${item}</div>`).join(""); 
+        btnLimpar.style.display = "block";
+    }
+
+    resultDiv.innerHTML = "<p><div class='titleHist'><strong>HISTÓRICO DE PESQUISAS</strong></div></p>" +
+    historico.map(item => `<div>${item}</div>`).join("");    
+}
+
+function limparHistorico() {
+    historico = [];
+    localStorage.removeItem("historico");
+    const resultDiv = document.getElementById("historico");
+    const btnLimpar = document.getElementById("btnLimparPesquisa");
+    resultDiv.innerHTML = "";
+    btnLimpar.style.display = "none";
+}
+
+document.getElementById ("btnCep").addEventListener ("click", () => { 
+    const cep = document.getElementById ("pesquisaCEP").value;
+    if (cep) {
+        salvarHistorico(`<p><strong>CEP:</strong> ${cep}<p/>`);
+    }
+    buscarCep();
+});
+
+document.getElementById ("btnEndereco").addEventListener ("click", () => {
+    const uf = document.getElementById ("pesquisaUF").value;
+    const localidade = document.getElementById ("pesquisaLocalidade").value;
+    const logradouro = document.getElementById ("pesquisaLogradouro").value;
+    if (uf && localidade && logradouro) {
+        salvarHistorico(`<p><strong>Endereço:</strong> ${uf}, ${localidade}, ${logradouro}</p>`);
+    }
+    buscarEndereço();
+});
+
+//Eventos de clique
+document.getElementById ("btnHistPesquisa").addEventListener ("click", carregarHistorico);
+document.getElementById ("btnLimparPesquisa").addEventListener ("click", () => {
+    if (confirm ("Tem certeza que deseja limpar o histórico?")) {
+        console.log ("Histórico limpo");
+        limparHistorico();
+    } else {
+        console.log ("Ação cancelada");
+    }
+});
 
